@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Multi Markers</title>
+  <style>
+    /* pour que la carte s'affiche correctement */
+    #map {
+      height: 100vh;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7Y32T_PJHZxYcK3BJYJFNwSl6cuvLXpo&callback=initMap&v=weekly"
+    defer></script>
+  
+  <script>
+    function initMap() {
+      // coordonnées de 3 points (exemple : lycée + 2 autres proches)
+      const points = [
+        { lat: 48.95838, lng: 2.54705, title: "Lycée Jean Rostand" },
+        { lat: 48.95904, lng: 2.54431, title: "Point 2" },
+        { lat: 48.96329, lng: 2.55025, title: "Point 3" },
+        { lat: 48.96151, lng: 2.55317, title: "Point 4" },
+        { lat: 48.96020, lng: 2.54827, title: "Point 5" },
+        { lat: 48.96087, lng: 2.54278, title: "Point 6" },
+      ];
+
+      // centre la carte sur le premier point
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 15.5,
+        center: points[0],
+      });
+
+      // boucle pour placer les marqueurs
+      points.forEach(p => {
+        new google.maps.Marker({
+          position: { lat: p.lat, lng: p.lng },
+          map,
+          title: p.title,
+        });
+      });
+    }
+
+    window.initMap = initMap;
+  </script>
+</body>
+</html>
